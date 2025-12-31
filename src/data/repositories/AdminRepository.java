@@ -6,5 +6,4 @@ public interface AdminRepository {
 
     long count();
 
-    Admin save(Admin admin);
 }

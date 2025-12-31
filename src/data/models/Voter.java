@@ -7,14 +7,6 @@ public class Voter {
     private String state;
     private String address;
 
-    public Voter(String name, int id, int age, String state, String address) {
-        this.name = name;
-        this.id = id;
-        this.age = age;
-        this.state = state;
-        this.address = address;
-    }
-
     public String getName() {
         return name;
     }

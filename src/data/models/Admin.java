@@ -2,7 +2,7 @@ package data.models;
 
 public class Admin {
     private String name;
-    private String phoneNumber;
+    private int phoneNumber;
     private String email;
     private String password;
 
@@ -14,11 +14,11 @@ public class Admin {
         this.name = name;
     }
 
-    public String getPhoneNumber() {
+    public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
