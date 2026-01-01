@@ -3,8 +3,26 @@ package dtos.requests;
 public class ViewCandidatesRequest {
     private String name;
     private String password;
-    private String voterId;
+    private int voterId;
     private boolean isRegistered;
+    private int age;
+    private String address;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public String getName() {
         return name;
@@ -22,11 +40,11 @@ public class ViewCandidatesRequest {
         this.password = password;
     }
 
-    public String getVoterId() {
+    public int getVoterId() {
         return voterId;
     }
 
-    public void setVoterId(String voterId) {
+    public void setVoterId(int voterId) {
         this.voterId = voterId;
     }
 
