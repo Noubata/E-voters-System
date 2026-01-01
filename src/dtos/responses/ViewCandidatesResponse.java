@@ -3,7 +3,7 @@ package dtos.responses;
 public class ViewCandidatesResponse {
     private String name;
     private String party;
-    private String candidateId;
+    private int candidateId;
 
     public String getName() {
         return name;
@@ -21,11 +21,11 @@ public class ViewCandidatesResponse {
         this.party = party;
     }
 
-    public String getCandidateId() {
+    public int getCandidateId() {
         return candidateId;
     }
 
-    public void setCandidateId(String candidateId) {
+    public void setCandidateId(int candidateId) {
         this.candidateId = candidateId;
     }
 }
