@@ -64,4 +64,14 @@ public class CandidateRepositoryImplementation implements CandidateRepository{
     public int size() {
         return candidates.size();
     }
+    @Override
+    public List<Candidate> findAll() {
+        List<Candidate> registeredCandidates = new ArrayList<>();
+        for (Candidate candidate : candidates) {
+            if (candidate.isRegistered()) {
+                registeredCandidates.add(candidate);
+            }
+        }
+        return registeredCandidates;
+    }
 }

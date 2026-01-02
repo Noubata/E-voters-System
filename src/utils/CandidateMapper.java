@@ -17,7 +17,6 @@ public class CandidateMapper {
 
     public static List<ViewCandidatesResponse> mapToCandidateResponseList(List<Candidate> candidates) {
         List<ViewCandidatesResponse> responses = new ArrayList<>();
-
         for (Candidate candidate : candidates) {
             ViewCandidatesResponse response = mapToCandidateResponse(candidate);
             responses.add(response);

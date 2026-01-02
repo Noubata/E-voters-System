@@ -49,4 +49,15 @@ public class CandidateRepositoryImplementationTest {
         assertEquals(1,candidateRepo.size());
         assertTrue(candidateRepo.existsById(candidate.getCandidateId()));
     }
+    @Test
+    public void testThatAllVotersExist(){
+        CandidateRepositoryImplementation candidateRepo = new CandidateRepositoryImplementation();
+        assertEquals(0, candidateRepo.count());
+        Candidate candidate1 = new Candidate();
+        candidateRepo.save(candidate1);
+        Candidate candidate2 = new Candidate();
+        candidateRepo.save(candidate2);
+        assertEquals(2,candidateRepo.size());
+        assertEquals(2, candidateRepo.findAll());
+    }
 }
