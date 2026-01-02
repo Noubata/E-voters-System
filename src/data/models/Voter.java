@@ -9,7 +9,23 @@ public class Voter {
     private boolean isRegistered;
     private String password;
     private int voterId;
+    private Integer candidateId;
+    private boolean hasVoted;
 
+    public boolean isHasVoted() {
+        return hasVoted;
+    }
+
+    public void setHasVoted(boolean hasVoted) {
+        this.hasVoted = hasVoted;
+    }
+
+    public Integer getCandidateId(){
+        return candidateId;
+    }
+    public void setCandidateId(Integer candidateId){
+        this.candidateId = candidateId;
+    }
     public boolean isRegistered() {
         return isRegistered;
     }

@@ -67,5 +67,15 @@ public class VoterRepositoryImplementation implements VoterRepository{
         }
         return false;
     }
+    @Override
+    public List<Voter> findAllWhoVoted() {
+        List<Voter> votedVoters = new ArrayList<>();
+        for (Voter voter : voters) {
+            if (voter.isHasVoted()) {
+                votedVoters.add(voter);
+            }
+        }
+        return votedVoters;
+    }
 
 }

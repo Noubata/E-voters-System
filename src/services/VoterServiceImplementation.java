@@ -7,8 +7,10 @@ import data.repositories.CandidateRepository;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
 import dtos.responses.LoginResponse;
+import dtos.responses.ResultResponse;
 import dtos.responses.ViewCandidatesResponse;
 import utils.CandidateMapper;
+import utils.ResultMapper;
 import utils.VoterMapper;
 import java.util.List;
 
@@ -51,5 +53,11 @@ public class VoterServiceImplementation implements VoterService{
         }
         boolean hasVoted  = voterRepository.existsById(voter.getVoterId());
         return VoterMapper.mapToLoginResponse(existingVoter, hasVoted);
+    }
+    @Override
+    public ResultResponse viewResults(){
+        List<Candidate> allCandidates = candidateRepository.findAll();
+        List<Voter> allVoters = voterRepository.findAllWhoVoted();
+        return ResultMapper.mapToResultResponse(allCandidates, allVoters);
     }
 }

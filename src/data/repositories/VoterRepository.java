@@ -2,6 +2,8 @@ package data.repositories;
 
 import data.models.Voter;
 
+import java.util.List;
+
 public interface VoterRepository {
     long count();
 
@@ -9,4 +11,5 @@ public interface VoterRepository {
     void deleteById(int voter);
     Voter findById(int voter);
     boolean existsById(Integer voter);
+    List<Voter> findAllWhoVoted();
 }
