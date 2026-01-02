@@ -3,6 +3,7 @@ package utils;
 import data.models.Voter;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
+import dtos.responses.LoginResponse;
 
 public class VoterMapper {
     public static Voter mapToVoterViewCandidates(ViewCandidatesRequest viewCandidatesRequest)  {
@@ -18,5 +19,11 @@ public class VoterMapper {
         voter.setPassword(loginRequest.getPassword());
         return voter;
     }
-
+    public static LoginResponse mapToLoginResponse(Voter voter, boolean hasVoted) {
+        LoginResponse response = new LoginResponse();
+        response.setVoterId(voter.getVoterId());
+        response.setVoterName(voter.getName());
+        response.setHasVoted(hasVoted);
+        return response;
+    }
 }
