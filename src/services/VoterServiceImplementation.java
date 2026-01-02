@@ -49,6 +49,7 @@ public class VoterServiceImplementation implements VoterService{
         if (!existingVoter.isRegistered()) {
             throw new RuntimeException("Voter is not registered");
         }
-
+        boolean hasVoted  = voterRepository.existsById(voter.getVoterId());
+        return VoterMapper.mapToLoginResponse(existingVoter, hasVoted);
     }
 }
