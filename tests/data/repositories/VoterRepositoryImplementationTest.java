@@ -46,6 +46,6 @@ public class VoterRepositoryImplementationTest {
         Voter voter = new Voter();
         voterRepo.save(voter);
         assertEquals(1,voterRepo.size());
-        assertTrue(voterRepo.existsById(voter.getId()));
+        assertTrue(voterRepo.existsById(voter.getNationalId()));
     }
 }

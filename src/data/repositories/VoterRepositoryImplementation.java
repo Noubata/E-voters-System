@@ -17,7 +17,7 @@ public class VoterRepositoryImplementation implements VoterRepository{
     @Override
     public Voter findById(int id){
         for (Voter theVoter: voters){
-            if (theVoter.getId() == id){
+            if (theVoter.getNationalId() == id){
                 return theVoter;
             }
         }
@@ -39,16 +39,16 @@ public class VoterRepositoryImplementation implements VoterRepository{
 
 
     private boolean isNew(Voter voter) {
-        return voter.getId() == 0;
+        return voter.getNationalId() == 0;
     }
     private void saveNew(Voter voter) {
         count++;
-        voter.setId(count);
+        voter.setNationalId(count);
         voters.add(voter);
     }
 
     private void update(Voter voter) {
-        deleteById(voter.getId());
+        deleteById(voter.getNationalId());
         voters.add(voter);
     }
 
@@ -61,7 +61,7 @@ public class VoterRepositoryImplementation implements VoterRepository{
             throw new IllegalArgumentException("ID can't be null");
         }
         for (Voter myVoter : voters) {
-            if (myVoter.getId() == voter) {
+            if (myVoter.getNationalId() == voter) {
                 return true;
             }
         }

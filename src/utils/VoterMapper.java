@@ -1,24 +1,22 @@
 package utils;
 
 import data.models.Voter;
+import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
-import dtos.responses.ViewCandidatesResponse;
 
 public class VoterMapper {
-    public static Voter mapVoterRequest(ViewCandidatesRequest viewCandidatesRequest)  {
+    public static Voter mapToVoterViewCandidates(ViewCandidatesRequest viewCandidatesRequest)  {
         Voter voter = new Voter();
-        voter.setId(viewCandidatesRequest.getVoterId());
-        voter.setName(viewCandidatesRequest.getName());
+        voter.setNationalId(viewCandidatesRequest.getVoterId());
         voter.setPassword(viewCandidatesRequest.getPassword());
-        voter.setAge(viewCandidatesRequest.getAge());
-        voter.setAddress(viewCandidatesRequest.getAddress());
+        voter.setRegistered(viewCandidatesRequest.isRegistered());
         return voter;
     }
-    public static ViewCandidatesResponse mapVoterResponse(Voter voter){
-        ViewCandidatesResponse viewCandidatesResponse = new ViewCandidatesResponse();
-        viewCandidatesResponse.setCandidateId(voter.getId());
-        viewCandidatesResponse.setName(voter.getName());
-        //viewCandidatesResponse.setParty(voter.getParty());
-        return viewCandidatesResponse;
+    public static Voter mapToVoterLogin(LoginRequest loginRequest){
+        Voter voter = new Voter();
+        voter.setNationalId(loginRequest.getVoterId());
+        voter.setPassword(loginRequest.getPassword());
+        return voter;
     }
+
 }

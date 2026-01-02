@@ -2,12 +2,13 @@ package data.models;
 
 public class Voter {
     private String name;
-    private int id;
+    private int nationalId;
     private int age;
     private String state;
     private String address;
     private boolean isRegistered;
     private String password;
+    private int voterId;
 
     public boolean isRegistered() {
         return isRegistered;
@@ -33,12 +34,12 @@ public class Voter {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public int getNationalId() {
+        return nationalId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNationalId(int id) {
+        this.nationalId = id;
     }
 
     public int getAge() {
@@ -63,5 +64,12 @@ public class Voter {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public int getVoterId() {
+        return voterId;
+    }
+    public void setVoterId(int voterId){
+        this.voterId = voterId;
     }
 }
