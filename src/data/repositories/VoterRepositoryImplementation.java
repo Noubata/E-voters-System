@@ -77,5 +77,14 @@ public class VoterRepositoryImplementation implements VoterRepository{
         }
         return votedVoters;
     }
+    @Override
+    public boolean hasVoterVoted(int nationalId) {
+        for (Voter voter : voters) {
+            if (voter.getVoterId() == nationalId) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -4,8 +4,10 @@ import data.models.Candidate;
 import data.models.Voter;
 import data.repositories.VoterRepository;
 import data.repositories.CandidateRepository;
+import dtos.requests.CheckEligibilityRequest;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
+import dtos.responses.CheckEligibilityResponse;
 import dtos.responses.LoginResponse;
 import dtos.responses.ResultResponse;
 import dtos.responses.ViewCandidatesResponse;
@@ -59,5 +61,29 @@ public class VoterServiceImplementation implements VoterService{
         List<Candidate> allCandidates = candidateRepository.findAll();
         List<Voter> allVoters = voterRepository.findAllWhoVoted();
         return ResultMapper.mapToResultResponse(allCandidates, allVoters);
+    }
+    @Override
+    public CheckEligibilityResponse eligibility(CheckEligibilityRequest request){
+        Voter voter = VoterMapper.mapToEligibilityResponse(request);
+        Voter eligibleVoter = voterRepository.findById(voter.getNationalId());
+        if (voter == null) {
+            return new CheckEligibilityResponse(false, "Voter not found or National ID not registered");
+        }
+        boolean hasVoted = voterRepository.hasVoterVoted(voter.getNationalId());
+        boolean isEligible = voter.isRegistered() && voter.getAge() >=18 && hasVoted;
+        String message;
+
+        if (isEligible) {
+            message = "Voter is eligible to vote";
+        } else if (!voter.isRegistered()) {
+            message = "Not eligible";
+        } else if (voter.getAge() < 18) {
+            message = "Not eligible";
+        } else if (hasVoted) {
+            message = "Not eligible";
+        } else {
+            message = "Not eligible";
+        }
+        return new CheckEligibilityResponse(isEligible, message);
     }
 }
