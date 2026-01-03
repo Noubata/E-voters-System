@@ -4,7 +4,9 @@ import data.models.Voter;
 import dtos.requests.CheckEligibilityRequest;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
+import dtos.requests.VoteCandidateRequest;
 import dtos.responses.LoginResponse;
+import dtos.responses.VoteCandidateResponse;
 
 public class VoterMapper {
     public static Voter mapToVoterViewCandidates(ViewCandidatesRequest viewCandidatesRequest)  {
@@ -33,5 +35,18 @@ public class VoterMapper {
         voter.setAge(voter.getNationalId());
         voter.setRegistered(voter.isRegistered());
         return  voter;
+    }
+    public static VoteCandidateResponse mapToVoteCandidateResponse(boolean success, String message) {
+        VoteCandidateResponse response = new VoteCandidateResponse();
+        response.setSuccess(success);
+        response.setMessage(message);
+        return response;
+    }
+    public static Voter mapToVote(Voter voter, VoteCandidateRequest request) {
+        Voter vote = new Voter();
+        vote.setVoterId((int) System.currentTimeMillis());
+        vote.setNationalId(voter.getNationalId());
+        vote.setCandidateId(request.getCandidateId());
+        return vote;
     }
 }
