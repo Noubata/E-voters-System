@@ -1,6 +1,7 @@
 package utils;
 
 import data.models.Voter;
+import dtos.requests.CheckEligibilityRequest;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
 import dtos.responses.LoginResponse;
@@ -25,5 +26,12 @@ public class VoterMapper {
         response.setVoterName(voter.getName());
         response.setHasVoted(hasVoted);
         return response;
+    }
+
+    public static Voter mapToEligibilityResponse(CheckEligibilityRequest request) {
+        Voter voter = new Voter();
+        voter.setAge(voter.getNationalId());
+        voter.setRegistered(voter.isRegistered());
+        return  voter;
     }
 }
