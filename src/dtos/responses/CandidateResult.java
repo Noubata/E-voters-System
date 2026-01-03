@@ -7,7 +7,6 @@ public class CandidateResult {
     private int voteCount;
     private Double votePercentage;
 
-    // Constructor
     public CandidateResult() {}
 
     public CandidateResult(int candidateId, String candidateName, String party, int voteCount) {
@@ -17,7 +16,6 @@ public class CandidateResult {
         this.voteCount = voteCount;
     }
 
-    // Getters and setters
     public int getCandidateId() {
         return candidateId;
     }
