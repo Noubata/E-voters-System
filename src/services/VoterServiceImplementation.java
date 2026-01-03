@@ -7,10 +7,8 @@ import data.repositories.CandidateRepository;
 import dtos.requests.CheckEligibilityRequest;
 import dtos.requests.LoginRequest;
 import dtos.requests.ViewCandidatesRequest;
-import dtos.responses.CheckEligibilityResponse;
-import dtos.responses.LoginResponse;
-import dtos.responses.ResultResponse;
-import dtos.responses.ViewCandidatesResponse;
+import dtos.requests.VoteCandidateRequest;
+import dtos.responses.*;
 import utils.CandidateMapper;
 import utils.ResultMapper;
 import utils.VoterMapper;
@@ -85,5 +83,37 @@ public class VoterServiceImplementation implements VoterService{
             message = "Not eligible";
         }
         return new CheckEligibilityResponse(isEligible, message);
+    }
+    @Override
+    public VoteCandidateResponse voteCandidate(VoteCandidateRequest request) {
+
+        Voter voter = voterRepository.findById(request.getVoterId());
+
+        if (voter == null) {
+            return VoterMapper.mapToVoteCandidateResponse(false, "Voter not found");
+        }
+
+        if (!voter.isRegistered()) {
+            return VoterMapper.mapToVoteCandidateResponse(false, "Voter is not registered");
+        }
+
+        boolean hasVoted = voterRepository.hasVoterVoted(voter.getNationalId());
+        if (hasVoted) {
+            return VoterMapper.mapToVoteCandidateResponse(false, "You have already voted");
+        }
+
+        if (voter.getAge() < 18) {
+            return VoterMapper.mapToVoteCandidateResponse(false, "You are not eligible to vote - must be 18 or older");
+        }
+
+        Candidate candidate = candidateRepository.findById(request.getCandidateId());
+        if (candidate == null) {
+            return VoterMapper.mapToVoteCandidateResponse(false, "Candidate not found");
+        }
+
+        Voter vote = VoterMapper.mapToVote(voter, request);
+        voterRepository.save(vote);
+
+        return new VoteCandidateResponse(true, "Vote cast successfully");
     }
 }
