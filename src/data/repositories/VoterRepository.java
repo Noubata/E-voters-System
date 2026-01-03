@@ -12,4 +12,5 @@ public interface VoterRepository {
     Voter findById(int voter);
     boolean existsById(Integer voter);
     List<Voter> findAllWhoVoted();
+    boolean hasVoterVoted(int nationalId);
 }
