@@ -1,10 +1,8 @@
 package utils;
 
 import data.models.Voter;
-import dtos.requests.CheckEligibilityRequest;
-import dtos.requests.LoginRequest;
-import dtos.requests.ViewCandidatesRequest;
-import dtos.requests.VoteCandidateRequest;
+import dtos.requests.*;
+import dtos.responses.CreateAccountResponse;
 import dtos.responses.LoginResponse;
 import dtos.responses.VoteCandidateResponse;
 
@@ -48,5 +46,20 @@ public class VoterMapper {
         vote.setNationalId(voter.getNationalId());
         vote.setCandidateId(request.getCandidateId());
         return vote;
+    }
+    public static Voter mapToVoter(int voterId, CreateAccountRequest request) {
+        Voter voter = new Voter();
+        voter.setVoterId(voterId);
+        voter.setName(request.getFullName());
+        voter.setPassword(request.getPassword());
+        return voter;
+    }
+
+    public static CreateAccountResponse mapToCreateAccountResponse(int voterId, String fullName, String password) {
+        CreateAccountResponse response = new CreateAccountResponse(voterId, fullName, password);
+        response.setVoterName(fullName);
+        response.setPassword(password);
+        response.setVoterId(voterId);
+        return response;
     }
 }

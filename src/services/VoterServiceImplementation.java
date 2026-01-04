@@ -4,10 +4,7 @@ import data.models.Candidate;
 import data.models.Voter;
 import data.repositories.VoterRepository;
 import data.repositories.CandidateRepository;
-import dtos.requests.CheckEligibilityRequest;
-import dtos.requests.LoginRequest;
-import dtos.requests.ViewCandidatesRequest;
-import dtos.requests.VoteCandidateRequest;
+import dtos.requests.*;
 import dtos.responses.*;
 import utils.CandidateMapper;
 import utils.ResultMapper;
@@ -17,6 +14,7 @@ import java.util.List;
 public class VoterServiceImplementation implements VoterService{
     private VoterRepository voterRepository;
     private CandidateRepository candidateRepository;
+    private int voterIdCounter = 1;
 
     public VoterServiceImplementation(VoterRepository voterRepository, CandidateRepository candidateRepository) {
         this.voterRepository = voterRepository;
@@ -116,4 +114,14 @@ public class VoterServiceImplementation implements VoterService{
 
         return new VoteCandidateResponse(true, "Vote cast successfully");
     }
+    @Override
+    public CreateAccountResponse createAccount(CreateAccountRequest request) {
+
+        Voter voter = VoterMapper.mapToVoter(voterIdCounter++, request);
+
+        voterRepository.save(voter);
+
+        return VoterMapper.mapToCreateAccountResponse(voter.getVoterId(), voter.getName(), voter.getPassword());
+    }
+
 }
