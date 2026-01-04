@@ -12,4 +12,5 @@ public interface VoterService {
     CheckEligibilityResponse eligibility (CheckEligibilityRequest request);
     VoteCandidateResponse voteCandidate (VoteCandidateRequest request);
     CreateAccountResponse createAccount (CreateAccountRequest request);
+    EditUserProfileResponse editUserProfile (EditUserProfileRequest request);
 }

@@ -3,6 +3,7 @@ package utils;
 import data.models.Voter;
 import dtos.requests.*;
 import dtos.responses.CreateAccountResponse;
+import dtos.responses.EditUserProfileResponse;
 import dtos.responses.LoginResponse;
 import dtos.responses.VoteCandidateResponse;
 
@@ -60,6 +61,29 @@ public class VoterMapper {
         response.setVoterName(fullName);
         response.setPassword(password);
         response.setVoterId(voterId);
+        return response;
+    }
+
+    public static Voter mapToVoter(EditUserProfileRequest request) {
+        Voter vote = new Voter();
+        vote.setPassword(request.getPassword());
+        vote.setName(request.getFullName());
+        vote.setAddress(request.getAddress());
+        vote.setState(request.getState());
+        vote.setEmail(request.getEmail());
+        vote.setPhone(request.getPhone());
+        vote.setAge(request.getAge());
+        return vote;
+    }
+    public static EditUserProfileResponse mapToEditUserProfileResponse(String password, String address, String email, String name, String phone, String state, int age) {
+        EditUserProfileResponse response = new EditUserProfileResponse();
+        response.setPassword(password);
+        response.setAddress(address);
+        response.setEmail(email);
+        response.setName(name);
+        response.setPhone(phone);
+        response.setState(state);
+        response.setAge(age);
         return response;
     }
 }
