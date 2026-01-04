@@ -2,10 +2,7 @@ package utils;
 
 import data.models.Voter;
 import dtos.requests.*;
-import dtos.responses.CreateAccountResponse;
-import dtos.responses.EditUserProfileResponse;
-import dtos.responses.LoginResponse;
-import dtos.responses.VoteCandidateResponse;
+import dtos.responses.*;
 
 public class VoterMapper {
     public static Voter mapToVoterViewCandidates(ViewCandidatesRequest viewCandidatesRequest)  {
@@ -84,6 +81,13 @@ public class VoterMapper {
         response.setPhone(phone);
         response.setState(state);
         response.setAge(age);
+        return response;
+    }
+    public static DeleteUserResponse mapToDeleteUserResponse(int voterId, String name) {
+        DeleteUserResponse response = new DeleteUserResponse();
+        response.setVoterId(voterId);
+        response.setVoterName(name);
+        response.setMessage("Account successfully deleted");
         return response;
     }
 }

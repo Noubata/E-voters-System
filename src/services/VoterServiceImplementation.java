@@ -127,17 +127,15 @@ public class VoterServiceImplementation implements VoterService{
     public EditUserProfileResponse editUserProfile(EditUserProfileRequest request) {
 
         Voter existingVoter = null;
-        for (Voter v : voterRepository.findAllWhoVoted()) {
-            if (v.getVoterId() == request.getVoterId()) {
-                existingVoter = v;
+        for (Voter voter : voterRepository.findAllWhoVoted()) {
+            if (voter.getVoterId() == request.getVoterId()) {
+                existingVoter = voter;
                 break;
             }
         }
-
         if (existingVoter == null) {
             throw new RuntimeException("Voter not found");
         }
-
         existingVoter.setPassword(request.getPassword());
         existingVoter.setName(request.getFullName());
         existingVoter.setAddress(request.getAddress());
@@ -148,5 +146,23 @@ public class VoterServiceImplementation implements VoterService{
 
         return VoterMapper.mapToEditUserProfileResponse(existingVoter.getPassword(), existingVoter.getAddress(), existingVoter.getEmail(), existingVoter.getName(), existingVoter.getPhone(), existingVoter.getState(), existingVoter.getAge());
     }
+    @Override
+    public DeleteUserResponse deleteUserAccount(DeleteUserRequest request) {
+
+        Voter voterToDelete = null;
+
+        for (Voter voter : voterRepository.findAllWhoVoted()) {
+            if (voter.getVoterId() == request.getVoterId()) {
+                voterToDelete = voter;
+                break;
+            }
+        }
+        if (voterToDelete == null) {
+            throw new RuntimeException("Voter not found");
+        }
+        voterRepository.findAllWhoVoted().remove(voterToDelete);
+        return VoterMapper.mapToDeleteUserResponse(voterToDelete.getVoterId(), voterToDelete.getName());
+    }
+
 
 }

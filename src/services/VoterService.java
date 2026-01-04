@@ -13,4 +13,6 @@ public interface VoterService {
     VoteCandidateResponse voteCandidate (VoteCandidateRequest request);
     CreateAccountResponse createAccount (CreateAccountRequest request);
     EditUserProfileResponse editUserProfile (EditUserProfileRequest request);
+
+    DeleteUserResponse deleteUserAccount(DeleteUserRequest request);
 }
