@@ -123,5 +123,30 @@ public class VoterServiceImplementation implements VoterService{
 
         return VoterMapper.mapToCreateAccountResponse(voter.getVoterId(), voter.getName(), voter.getPassword());
     }
+    @Override
+    public EditUserProfileResponse editUserProfile(EditUserProfileRequest request) {
+
+        Voter existingVoter = null;
+        for (Voter v : voterRepository.findAllWhoVoted()) {
+            if (v.getVoterId() == request.getVoterId()) {
+                existingVoter = v;
+                break;
+            }
+        }
+
+        if (existingVoter == null) {
+            throw new RuntimeException("Voter not found");
+        }
+
+        existingVoter.setPassword(request.getPassword());
+        existingVoter.setName(request.getFullName());
+        existingVoter.setAddress(request.getAddress());
+        existingVoter.setState(request.getState());
+        existingVoter.setEmail(request.getEmail());
+        existingVoter.setPhone(request.getPhone());
+        existingVoter.setAge(request.getAge());
+
+        return VoterMapper.mapToEditUserProfileResponse(existingVoter.getPassword(), existingVoter.getAddress(), existingVoter.getEmail(), existingVoter.getName(), existingVoter.getPhone(), existingVoter.getState(), existingVoter.getAge());
+    }
 
 }
